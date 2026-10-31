@@ -1,80 +1,114 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17172d">
-<title>Masti₹1 — Daily Fun</title>
+<title>Masti1 - Daily Entertainment</title>
 <style>
-:root{--ink:#17172d;--purple:#6c4df6;--bg:#f5f5fb;--muted:#686879}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-header{background:linear-gradient(135deg,#17172d,#4932a8);color:white;padding:28px 18px 34px}
-.wrap{max-width:760px;margin:auto}h1{font-size:34px;margin:0 0 6px}header p{margin:0;color:#e3defe}
-main{padding:18px;max-width:760px;margin:auto}.card{background:white;border-radius:18px;padding:20px;margin:0 0 16px;box-shadow:0 5px 20px #17172d0d}
-.price{font-size:30px;font-weight:800;color:var(--purple)}.muted{color:var(--muted);font-size:14px}
-button{border:0;border-radius:12px;background:var(--purple);color:white;padding:13px 17px;font-size:16px;font-weight:700;cursor:pointer}
-button.secondary{background:#eeeaff;color:#3926a1}.choices{display:grid;gap:10px;margin:16px 0}
-.choices button{background:#f0eff8;color:var(--ink);text-align:left;border:2px solid transparent}
-.choices button:hover{border-color:var(--purple)}.choices button:disabled{opacity:.75;cursor:default}
-#feedback{font-weight:700;min-height:24px}.pill{display:inline-block;background:#eeeaff;color:#3926a1;padding:5px 10px;border-radius:99px;font-size:12px;font-weight:700}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:15px}
-.notice{background:#fff7df;border-left:4px solid #e2a500;padding:12px;border-radius:8px;font-size:13px}
+*{box-sizing:border-box}
+body{margin:0;background:#101124;color:white;font-family:Arial,sans-serif}
+header{padding:25px 18px;text-align:center;background:linear-gradient(135deg,#7138d9,#ed4b9b)}
+header h1{font-size:34px;margin:5px}
+header p{margin:8px}
+main{max-width:650px;margin:auto;padding:18px}
+.card{background:#20213b;padding:20px;margin:16px 0;border-radius:17px;border:1px solid #383958}
+h2{margin-top:0;color:#ffcf70}
+button{background:#8052ed;color:white;border:0;padding:13px 18px;border-radius:10px;font-size:16px;margin:5px;cursor:pointer}
+button:hover{opacity:.85}
+.option{display:block;width:100%;text-align:left;background:#343552;margin:10px 0}
+#result{color:#76edac;font-weight:bold;margin-top:12px}
+.price{font-size:28px;font-weight:bold;color:#ffcf70}
+footer{text-align:center;padding:25px;color:#aaa}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <span class="pill">PLAY • THINK • LAUGH</span>
-  <h1>Masti₹1</h1>
-  <p>Roz ka ek naya fun challenge — India ke liye.</p>
-</div></header>
+<header>
+<h1>🎉 Masti1</h1>
+<p>India's Daily Entertainment Platform</p>
+<p>Play • Laugh • Challenge</p>
+</header>
 <main>
-  <section class="card">
-    <div class="muted">DAILY PASS (proposed)</div>
-    <div class="price">₹1 <span style="font-size:15px;color:#686879;font-weight:500">/ day</span></div>
-    <p class="muted">Quiz, puzzles aur daily challenges. Payment activation abhi setup nahi hui hai.</p>
-    <div class="notice"><b>Demo version:</b> Is website mein abhi real payment nahi liya ja raha. Kisi ko payment karne ko na kahen. Live payments ke liye verified payment gateway aur server-side verification zaroori hai.</div>
-  </section>
-  <section class="card">
-    <span class="pill">TODAY'S QUIZ</span>
-    <h2 id="question">Loading…</h2>
-    <div class="choices" id="choices"></div>
-    <div id="feedback" aria-live="polite"></div>
-    <p class="muted" id="score">Score: 0</p>
-    <button class="secondary" id="next" hidden>Next question</button>
-  </section>
-  <section class="card">
-    <h2>Coming soon</h2>
-    <p>🧩 Daily brain puzzles</p><p>😂 Funny questions</p><p>🏆 Weekly leaderboard</p>
-    <p class="muted">Leaderboard aur user accounts ko live launch se pehle database se connect karna hoga.</p>
-  </section>
+<div class="card">
+<h2>🌟 Welcome to Masti1</h2>
+<p>Roz naye games, मजेदार सवाल और हँसी का मजा लें!</p>
+</div>
+
+<div class="card">
+<h2>🧠 Daily Quiz</h2>
+<p id="question">भारत की राजधानी क्या है?</p>
+<div id="options"></div>
+<p id="result"></p>
+<button onclick="nextQuiz()">Next Question ➜</button>
+</div>
+
+<div class="card">
+<h2>😂 Funny Joke</h2>
+<p id="joke">टीचर: बताओ सबसे ज्यादा नशा किस चीज में होता है? छात्र: किताबों में, खोलते ही नींद आ जाती है!</p>
+<button onclick="newJoke()">New Joke 😂</button>
+</div>
+
+<div class="card">
+<h2>🧩 Brain Challenge</h2>
+<p>ऐसी कौन सी चीज है जो पानी पीते ही मर जाती है?</p>
+<button onclick="showAnswer()">Answer देखो</button>
+<p id="answer"></p>
+</div>
+
+<div class="card">
+<h2>💎 Daily Membership</h2>
+<p class="price">₹1 / Day</p>
+<p>Premium entertainment features जल्द उपलब्ध होंगे।</p>
+<button onclick="alert('Membership payment setup is coming soon!')">Join Membership</button>
+<p><small>अभी यह Demo है। कोई भुगतान नहीं होगा।</small></p>
+</div>
 </main>
-<footer>© <span id="year"></span> Masti₹1 • Entertainment prototype</footer>
+<footer>
+<p>© 2026 Masti1 India</p>
+<p>Made for Entertainment ❤️</p>
+</footer>
+
 <script>
-const quiz=[
- {q:"भारत का राष्ट्रीय पशु कौन-सा है?",a:["शेर","बाघ","हाथी","मोर"],c:1,why:"भारत का राष्ट्रीय पशु बाघ है।"},
- {q:"एक सप्ताह में कितने दिन होते हैं?",a:["5","6","7","8"],c:2,why:"एक सप्ताह में 7 दिन होते हैं।"},
- {q:"लाल ग्रह किसे कहा जाता है?",a:["शुक्र","मंगल","बृहस्पति","बुध"],c:1,why:"मंगल ग्रह को लाल ग्रह कहा जाता है।"},
- {q:"भारत की राजधानी क्या है?",a:["मुंबई","कोलकाता","नई दिल्ली","चेन्नई"],c:2,why:"भारत की राजधानी नई दिल्ली है।"},
- {q:"पानी का रासायनिक सूत्र क्या है?",a:["CO₂","O₂","H₂O","NaCl"],c:2,why:"पानी का रासायनिक सूत्र H₂O है।"}
+const quizzes=[
+{q:"भारत की राजधानी क्या है?",o:["Mumbai","Delhi","Kolkata"],a:1},
+{q:"एक सप्ताह में कितने दिन होते हैं?",o:["5","6","7"],a:2},
+{q:"सूरज किस दिशा से निकलता है?",o:["पूर्व","पश्चिम","उत्तर"],a:0},
+{q:"भारत का राष्ट्रीय पशु कौन है?",o:["शेर","बाघ","हाथी"],a:1},
+{q:"2 + 5 कितना होता है?",o:["6","7","8"],a:1}
 ];
-const day=Math.floor(Date.now()/86400000), item=quiz[day%quiz.length];
-let score=0,answered=false;
-document.getElementById("year").textContent=new Date().getFullYear();
-function render(){
- document.getElementById("question").textContent=item.q;
- const box=document.getElementById("choices");box.innerHTML="";
- item.a.forEach((v,i)=>{const b=document.createElement("button");b.textContent=(i+1)+". "+v;b.onclick=()=>choose(i,b);box.appendChild(b)});
+let current=0;
+function loadQuiz(){
+let q=quizzes[current];
+document.getElementById("question").textContent=q.q;
+document.getElementById("result").textContent="";
+document.getElementById("options").innerHTML="";
+q.o.forEach((option,i)=>{
+let b=document.createElement("button");
+b.className="option";
+b.textContent=option;
+b.onclick=()=>{
+document.getElementById("result").textContent=
+i===q.a?"🎉 सही जवाब!":"❌ गलत जवाब! सही जवाब: "+q.o[q.a];
+};
+document.getElementById("options").appendChild(b);
+});
 }
-function choose(i,btn){
- if(answered)return;answered=true;
- const buttons=[...document.querySelectorAll("#choices button")];buttons.forEach(b=>b.disabled=true);
- if(i===item.c){score=1;document.getElementById("feedback").textContent="Sahi jawab! 🎉 "+item.why;}
- else{document.getElementById("feedback").textContent="Koshish achhi thi! Sahi jawab: "+item.a[item.c]+". "+item.why;}
- document.getElementById("score").textContent="Score: "+score;
- document.getElementById("next").hidden=false;
+function nextQuiz(){
+current=(current+1)%quizzes.length;
+loadQuiz();
 }
-document.getElementById("next").onclick=()=>{document.getElementById("feedback").textContent="Aaj ka demo quiz complete! Kal naya challenge dekhein.";document.getElementById("next").disabled=true;};
-render();
+const jokes=[
+"टीचर: होमवर्क क्यों नहीं किया? छात्र: बिजली नहीं थी! टीचर: तो मोमबत्ती जला लेते! छात्र: माचिस नहीं थी!",
+"दोस्त: तुम पढ़ाई कब करते हो? दूसरा: जब फोन की बैटरी खत्म होती है!",
+"टीचर: सबसे तेज क्या चलता है? छात्र: छुट्टी की घंटी सुनकर बच्चे!"
+];
+function newJoke(){
+document.getElementById("joke").textContent=jokes[Math.floor(Math.random()*jokes.length)];
+}
+function showAnswer(){
+document.getElementById("answer").textContent="आग 🔥";
+}
+loadQuiz();
 </script>
 </body>
 </html>
