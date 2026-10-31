@@ -1,114 +1,126 @@
 
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Masti1 - Daily Entertainment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masti1 - Play Laugh Challenge</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#101124;color:white;font-family:Arial,sans-serif}
-header{padding:25px 18px;text-align:center;background:linear-gradient(135deg,#7138d9,#ed4b9b)}
-header h1{font-size:34px;margin:5px}
-header p{margin:8px}
-main{max-width:650px;margin:auto;padding:18px}
-.card{background:#20213b;padding:20px;margin:16px 0;border-radius:17px;border:1px solid #383958}
-h2{margin-top:0;color:#ffcf70}
-button{background:#8052ed;color:white;border:0;padding:13px 18px;border-radius:10px;font-size:16px;margin:5px;cursor:pointer}
-button:hover{opacity:.85}
-.option{display:block;width:100%;text-align:left;background:#343552;margin:10px 0}
-#result{color:#76edac;font-weight:bold;margin-top:12px}
-.price{font-size:28px;font-weight:bold;color:#ffcf70}
-footer{text-align:center;padding:25px;color:#aaa}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f2ff;color:#201b36}
+header{background:#211a43;color:white;padding:22px 16px;text-align:center}
+header h1{margin:0;font-size:32px}
+header p{margin:8px 0 0;color:#ddd5ff}
+main{max-width:700px;margin:auto;padding:16px}
+.card{background:white;padding:20px;border-radius:18px;margin:15px 0;box-shadow:0 4px 18px #211a4312}
+h2{margin-top:0}
+button{background:#6446df;color:white;border:0;border-radius:10px;padding:12px 16px;font-size:16px;cursor:pointer;margin:5px 3px}
+button:hover{opacity:.9}
+.option{display:block;width:100%;text-align:left;background:#eeeaff;color:#211a43}
+#result{font-weight:bold;margin-top:12px}
+.score{background:#211a43;color:white;border-radius:12px;padding:14px;text-align:center}
+footer{text-align:center;padding:25px;color:#655d7b}
 </style>
 </head>
 <body>
 <header>
 <h1>🎉 Masti1</h1>
-<p>India's Daily Entertainment Platform</p>
-<p>Play • Laugh • Challenge</p>
+<p>Play. Laugh. Challenge!</p>
+<p>Entertainment ka daily dose — FREE</p>
 </header>
 <main>
-<div class="card">
-<h2>🌟 Welcome to Masti1</h2>
-<p>Roz naye games, मजेदार सवाल और हँसी का मजा लें!</p>
+<div class="score">
+Your Points: <strong id="score">0</strong>
 </div>
 
-<div class="card">
+<section class="card">
 <h2>🧠 Daily Quiz</h2>
-<p id="question">भारत की राजधानी क्या है?</p>
+<p id="question">India ki capital kya hai?</p>
 <div id="options"></div>
-<p id="result"></p>
-<button onclick="nextQuiz()">Next Question ➜</button>
-</div>
+<p id="quizResult"></p>
+<button onclick="nextQuestion()">Next Question ➜</button>
+</section>
 
-<div class="card">
-<h2>😂 Funny Joke</h2>
-<p id="joke">टीचर: बताओ सबसे ज्यादा नशा किस चीज में होता है? छात्र: किताबों में, खोलते ही नींद आ जाती है!</p>
+<section class="card">
+<h2>😂 Funny Zone</h2>
+<p id="joke">Click karo aur ek joke padho!</p>
 <button onclick="newJoke()">New Joke 😂</button>
-</div>
+</section>
 
-<div class="card">
-<h2>🧩 Brain Challenge</h2>
-<p>ऐसी कौन सी चीज है जो पानी पीते ही मर जाती है?</p>
-<button onclick="showAnswer()">Answer देखो</button>
-<p id="answer"></p>
-</div>
+<section class="card">
+<h2>⚡ Brain Challenge</h2>
+<p>Ek race mein tumne second position wale ko overtake kiya. Ab tum kis position par ho?</p>
+<button onclick="brainAnswer()">Answer dekho</button>
+<p id="brainResult"></p>
+</section>
 
-<div class="card">
-<h2>💎 Daily Membership</h2>
-<p class="price">₹1 / Day</p>
-<p>Premium entertainment features जल्द उपलब्ध होंगे।</p>
-<button onclick="alert('Membership payment setup is coming soon!')">Join Membership</button>
-<p><small>अभी यह Demo है। कोई भुगतान नहीं होगा।</small></p>
-</div>
+<section class="card">
+<h2>🏆 Challenge Your Friends</h2>
+<p>Apne friends ko Masti1 par khelne ke liye bulao!</p>
+<button onclick="shareSite()">Share Masti1 📲</button>
+</section>
 </main>
-<footer>
-<p>© 2026 Masti1 India</p>
-<p>Made for Entertainment ❤️</p>
-</footer>
+<footer>© 2026 Masti1 | Made for fun ❤️</footer>
 
 <script>
-const quizzes=[
-{q:"भारत की राजधानी क्या है?",o:["Mumbai","Delhi","Kolkata"],a:1},
-{q:"एक सप्ताह में कितने दिन होते हैं?",o:["5","6","7"],a:2},
-{q:"सूरज किस दिशा से निकलता है?",o:["पूर्व","पश्चिम","उत्तर"],a:0},
-{q:"भारत का राष्ट्रीय पशु कौन है?",o:["शेर","बाघ","हाथी"],a:1},
-{q:"2 + 5 कितना होता है?",o:["6","7","8"],a:1}
+const questions=[
+{q:"India ki capital kya hai?",o:["Mumbai","New Delhi","Kolkata","Chennai"],a:1},
+{q:"Ek week mein kitne din hote hain?",o:["5","6","7","8"],a:2},
+{q:"Suraj kis direction se nikalta hai?",o:["West","East","North","South"],a:1},
+{q:"5 × 5 kitna hota hai?",o:["10","15","20","25"],a:3},
+{q:"Duniya ka sabse bada ocean kaunsa hai?",o:["Atlantic","Indian","Pacific","Arctic"],a:2}
 ];
-let current=0;
-function loadQuiz(){
-let q=quizzes[current];
-document.getElementById("question").textContent=q.q;
-document.getElementById("result").textContent="";
-document.getElementById("options").innerHTML="";
-q.o.forEach((option,i)=>{
-let b=document.createElement("button");
-b.className="option";
-b.textContent=option;
-b.onclick=()=>{
-document.getElementById("result").textContent=
-i===q.a?"🎉 सही जवाब!":"❌ गलत जवाब! सही जवाब: "+q.o[q.a];
-};
-document.getElementById("options").appendChild(b);
-});
-}
-function nextQuiz(){
-current=(current+1)%quizzes.length;
-loadQuiz();
-}
 const jokes=[
-"टीचर: होमवर्क क्यों नहीं किया? छात्र: बिजली नहीं थी! टीचर: तो मोमबत्ती जला लेते! छात्र: माचिस नहीं थी!",
-"दोस्त: तुम पढ़ाई कब करते हो? दूसरा: जब फोन की बैटरी खत्म होती है!",
-"टीचर: सबसे तेज क्या चलता है? छात्र: छुट्टी की घंटी सुनकर बच्चे!"
+"Teacher: Homework kahan hai? Student: Sir, Google Drive mein! 😂",
+"Friend: Tu itna khush kyun hai? Me: Battery 100% hai! 😄",
+"Papa: Padhai kaisi chal rahi hai? Beta: Wi-Fi jaisi, kabhi fast kabhi slow! 😂",
+"Doctor: Aapko aaram ki zarurat hai. Patient: Office ko bhi samjha do! 😆"
 ];
+let index=0,points=0,answered=false;
+function showQuestion(){
+answered=false;
+let q=questions[index];
+document.getElementById("question").textContent=q.q;
+document.getElementById("quizResult").textContent="";
+let html="";
+q.o.forEach((v,i)=>{
+html+=`<button class="option" onclick="answer(${i})">${v}</button>`;
+});
+document.getElementById("options").innerHTML=html;
+}
+function answer(i){
+if(answered)return;
+answered=true;
+if(i===questions[index].a){
+points+=10;
+document.getElementById("quizResult").textContent="Correct! +10 points 🎉";
+}else{
+document.getElementById("quizResult").textContent="Wrong answer! Try next one.";
+}
+document.getElementById("score").textContent=points;
+}
+function nextQuestion(){
+index=(index+1)%questions.length;
+showQuestion();
+}
 function newJoke(){
-document.getElementById("joke").textContent=jokes[Math.floor(Math.random()*jokes.length)];
+let j=jokes[Math.floor(Math.random()*jokes.length)];
+document.getElementById("joke").textContent=j;
 }
-function showAnswer(){
-document.getElementById("answer").textContent="आग 🔥";
+function brainAnswer(){
+document.getElementById("brainResult").textContent=
+"Answer: Second position! Tumne second wale ko overtake kiya, first ko nahi. 😉";
 }
-loadQuiz();
+function shareSite(){
+let url=location.href;
+let msg="Masti1 par aao, quiz khelo aur mujhe challenge karo! "+url;
+if(navigator.share){
+navigator.share({title:"Masti1",text:msg,url:url}).catch(()=>{});
+}else{
+window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
+}
+}
+showQuestion();
 </script>
 </body>
 </html>
