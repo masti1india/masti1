@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GK Bharat Registry | Instagram Username Registration</title>
+<meta name="description" content="GK Bharat Registry — register your Instagram username for ₹1. Independent voluntary registry.">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#14213d;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:28px 16px 54px;text-align:center;color:white;background:linear-gradient(130deg,#10213b,#1749a5)}
+.flag{font-size:30px}header h1{margin:8px 0;font-size:clamp(25px,6vw,39px)}header p{max-width:600px;margin:0 auto;color:#e2eaff;line-height:1.55}
+main{max-width:760px;margin:-28px auto 36px;padding:0 14px}
+.card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 10px 30px #10213b0d;margin-bottom:14px}
+.counter{text-align:center}.counter small{color:#64748b;font-weight:700;letter-spacing:1px}.number{font-size:clamp(36px,9vw,54px);font-weight:800;color:#1749a5;line-height:1.2;margin:8px 0}.counter p{margin:0;color:#64748b}
+h2{font-size:22px;margin:0 0 8px}.muted{font-size:14px;color:#64748b;line-height:1.55}
+label{display:block;font-size:14px;font-weight:700;margin:15px 0 6px}input{width:100%;border:1px solid #d6deeb;border-radius:11px;padding:13px;font:inherit;outline-color:#1749a5}
+button{width:100%;margin-top:14px;padding:14px;border:0;border-radius:11px;background:#1749a5;color:white;font-size:16px;font-weight:800;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+.notice{display:none;margin-top:12px;padding:12px;border-radius:10px;background:#ecfdf3;color:#166534;font-size:14px}.notice.error{background:#fff1f2;color:#9f1239}
+.price{display:inline-block;background:#fff3e6;color:#9a4b00;border-radius:30px;padding:5px 12px;font-weight:800}
+footer{text-align:center;color:#64748b;font-size:12px;padding:18px;line-height:1.6}
+.list{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #edf1f6;font-size:14px}.list:last-child{border:0}
+</style>
+</head>
+<body>
+<header>
+<div class="flag">🇮🇳</div>
+<h1>GK Bharat Registry</h1>
+<p>India ke Instagram usernames ki voluntary registry. Apna username register karein aur campaign ka hissa banein.</p>
+</header>
+<main>
+<section class="card counter">
+<small>TOTAL REGISTERED USERNAMES</small>
+<div class="number" id="count">0</div>
+<p>Registration fee: <span class="price">₹1</span></p>
+</section>
+<section class="card">
+<h2>Register Your Instagram Username</h2>
+<p class="muted">Sirf Instagram username submit karein. Password, OTP ya personal account access kabhi nahi maanga jayega.</p>
+<form id="form">
+<label for="username">Instagram username</label>
+<input id="username" name="username" required maxlength="30" placeholder="@yourusername" pattern="@?[A-Za-z0-9._]+" title="Letters, numbers, dot aur underscore allowed hain">
+<label style="font-weight:400;display:flex;gap:9px;align-items:flex-start"><input id="consent" type="checkbox" required style="width:auto;margin-top:4px"><span>Main ₹1 registration fee aur voluntary registry ki terms se sahmat hoon. Yeh Instagram ya Government of India ki official service nahi hai.</span></label>
+<button id="submit" type="submit">Register for ₹1</button>
+</form>
+<div id="notice" class="notice" role="status"></div>
+</section>
+<section class="card">
+<h2>Recent registrations</h2>
+<p class="muted">Demo mode mein recent entries sirf isi browser par dikhengi. Public listing production mein privacy controls ke saath enable ki jayegi.</p>
+<div id="recent"><div class="list"><span>No registrations yet</span><span>—</span></div></div>
+</section>
+<section class="card">
+<h2>About GK Bharat Registry</h2>
+<p class="muted">An independent voluntary project that counts submitted Instagram usernames. The counter is not an official estimate of Instagram users in India and the project is not affiliated with Instagram or the Government of India.</p>
+</section>
+</main>
+<footer>GK Bharat Registry • Independent campaign • Demo website<br>Live UPI collection and server-based counter are not connected in this prototype.</footer>
+<script>
+const KEY='gkbr_demo_records_v1';
+function read(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function render(){let rows=read();document.getElementById('count').textContent=rows.length.toLocaleString('en-IN');let area=document.getElementById('recent');area.innerHTML='';if(!rows.length){area.innerHTML='<div class="list"><span>No registrations yet</span><span>—</span>';return}rows.slice(-5).reverse().forEach(x=>{let d=document.createElement('div');d.className='list';let a=document.createElement('span');a.textContent='@'+x.username;let b=document.createElement('span');b.textContent='#'+String(x.number).padStart(6,'0');d.append(a,b);area.appendChild(d)})}
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();let username=document.getElementById('username').value.trim().replace(/^@/,'').toLowerCase();let notice=document.getElementById('notice');let rows=read();if(rows.some(x=>x.username===username)){notice.className='notice error';notice.style.display='block';notice.textContent='Yeh username is browser demo mein pehle register ho chuka hai.';return}rows.push({username,number:rows.length+1,createdAt:new Date().toISOString()});localStorage.setItem(KEY,JSON.stringify(rows));notice.className='notice';notice.style.display='block';notice.textContent='Demo registration saved! Registration number: #'+String(rows.length).padStart(6,'0')+'. Abhi ₹1 payment collect nahi hua.';e.target.reset();render()});
+render();
+</script>
+</body>
+</html>
